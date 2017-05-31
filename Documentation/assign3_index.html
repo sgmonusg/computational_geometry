@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+.sa {
+	font-family: Verdana, Geneva, sans-serif;
+}
+.dff {
+	font-family: Georgia, Times New Roman, Times, serif;
+}
+.sa strong {
+	font-weight: bold;
+}
+.er {
+	font-family: Georgia, Times New Roman, Times, serif;
+}
+</style>
+</head>
+
+<body> 	
+<h1 align="center"> Computational Geometry</h1>
+<h2 align="center"> Assignment 3 </h2>
+<h4 align="center"> by</h4>
+<h4 align="center"> <span class="dff">Sagar Gupta</span></h4>
+<h4 align="center" class="dff"> Shikhar </h4>
+<h4 align="center" class="dff"> Akshay Uppal </h4>
+
+<p align="center" class="sa"> <strong><u>POINT SET TRIANGULATION</u></strong></p>
+<p> Method : </p>
+
+<li> Step1: Form a convex hull of the given point set </li>
+<li> Step2: Take the rest of the points and sort them top to bottom </li>
+<li>Step3: Join all the points according to the order from top down</li>
+<li>Step4: Due to the above steps we obtained two y-monotone polygones</li>
+<li>Step5: Triangulate both the polygons</li>
+<p><strong>Challenges:</strong></p>
+<p>The main challenge in Point set triangulation was to merge the left and right DCEL. We found a hack by not doing this and instead displaying the output for both left and right hafs one after other.<br />
+This will be a valid triangulation although it won't work for delaunay triangulation because the edges that split the convex hull will never be flipped.</p>
+<p>Apart from this the good design of API for convex hull and triangulation helped in making the task easier.</p>
+<p><strong>IMAGES:</strong></p>
+<p><img src="4.jpg" width="490" height="396" /></p>
+<p><img src="1.jpg" width="490" height="396" /></p>
+<p>Analysis:</p>
+<p><img src="6.gif" width="490" height="396" /></p>
+<p>&nbsp;</p>
+<h3 align="center" class="er"><strong><u>DELAUNAY TRIANGULATION</u></strong></h3>
+<p><strong>Delaunay triangulation</strong> for a set <strong>P</strong> of points in a plane is a <strong>triangulation</strong> DT(<strong>P</strong>) such that no point in <strong>P</strong> is inside the circumcircle of any triangle in DT(<strong>P</strong>).<br />
+Delaunay triangulations <strong>maximize</strong> the <strong>minimum</strong> <strong>angle</strong> of all the angles of the triangles in the triangulation.<br />
+They tend to avoid <strong>sliver triangles</strong></p>
+<p>A <strong>triangulation</strong> is a subdivision of a <strong>planar object</strong> into triangles, and by extension the subdivision of a higher-dimension geometric object into <strong>simplices</strong>. <br />
+Triangulations of a three-dimensional volume would involve subdividing it into <strong>tetrahedra</strong> (&quot;pyramids&quot; of various shapes and sizes) packed together.</p>
+<p>A <strong>simplices</strong> is a generalization of the notion of a triangle or tetrahedron to arbitrary dimensions. <br />
+Specifically, a <strong><em>k</em>-simplex</strong> is a <em>k</em>-dimensional polytope which is the convex hull of its <em>k</em> + 1 vertices.</p>
+<p>A <strong>triangle</strong> is a polygon with three edges and three vertices. </p>
+<p>the <strong>circumscribed circle</strong> or <strong>circumcircle</strong> of a <strong>polygon</strong> is a circle which passes through all the vertices of the polygon. The <strong>center</strong> of this circle is called the <strong>circumcenter</strong> and its radius is called the <strong>circumradius</strong>.</p>
+<p><strong>Algorithm:</strong></p>
+<p>If a triangle is non-Delaunay, we can flip one of its edges.<br />
+This leads to a straightforward algorithm: construct any triangulation of the points, and then flip edges until no triangle is non-Delaunay. <br />
+Unfortunately, this can take Ω(<em>n</em>2) edge flips.<br />
+While this algorithm can be generalised to three and higher dimensions, its convergence is not guaranteed in these cases, as it is conditioned to the connectedness of the underlying   <strong>Flip Graph</strong><br />
+Flip Graph is connected for two dimensional sets of points, but may be disconnected in higher dimensions.</p>
+<p><strong>Challenges:</strong></p>
+<p>In some cases the code of constrainted delaunay triangulation due to the flip of same edge again and again the code ran into infinte loop.</p>
+<p><strong>IMAGES:</strong></p>
+<p><img src="2.jpg" width="490" height="396" /></p><p><img src="3.jpg" width="490" height="396" /></p>
+<p><img src="5.jpg" width="490" height="396" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

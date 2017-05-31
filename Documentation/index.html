@@ -1,0 +1,156 @@
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Convex Hull Algorithms</title>
+<style type="text/css">
+.heding {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.sa {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+}
+.sa strong {
+	font-weight: bold;
+}
+</style>
+</head>
+  
+  <body>
+  <h1 align="center">Selected Topics in Computer Science (CS F441) </h1>
+  <h1 align="center">Computational Geometry</h1>
+  <h2 align="center">BITS Pilani, Hyderabad Campus </h2>
+  <p align="center">By</p>
+  <p align="center">Sagar Gupta 2014A7PS030H</p>
+  <p align="center">Shikhar 2014A7PS113H</p>
+  <p align="center">Akhsay Uppal 2014A7PS866H</p>
+  <p align="center">___________________________________________________________________________________________________________________________________________________________________________ </p>
+  <h2><span class="sa"><strong><u>Introduction</u></strong></span></h2>
+<blockquote>
+  <p>What is a Convex hull?</p>
+  <blockquote>
+    <p><strong>Convex hull</strong> may be defined as the intersection of all convex sets containing <em>X</em> or as the set of all convex combination of points in <em>X</em>. </p>
+    <p>Three algorithms have been implemented namely </p>
+    <ol>
+      <li>Graham&rsquo;s scan algorithm</li>
+      <li>Jarvis March</li>
+      <li> Andrews&rsquo;s Algorithm</li>
+    </ol>
+    <blockquote>
+      <p>&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <p class="sa"><strong>Graham's Scan Algorithm</strong></p>
+  <blockquote>
+    <p class="sa"><strong><u>Defination</u></strong></p>
+    <blockquote>
+      <p class="sa"><strong>Graham's scan</strong> is a method of finding the convex hull of a finite set of points in the plane with time complexity<strong> O(<em>n</em> log <em>n</em>)</strong>. It is named after <strong>Ronald Graham</strong>, who published the original algorithm in 1972. The algorithm finds all vertices of the convex hull ordered along its boundary. It uses a<strong> stack</strong> to detect and remove concavities in the boundary efficiently.      </p>
+    </blockquote>
+    <p class="sa"><strong><u>Algorithm</u></strong></p>
+    <blockquote>
+      <p class="sa"><u>Step-1</u></p>
+      <blockquote>
+        <p>Find the point with the<strong> lowest y-coordinate</strong>. If the lowest y-coordinate exists in more than one point in the set, the point with the<strong> lowest x-coordinate </strong>out of the candidates should be chosen. Call this point <em><strong>P</strong></em>. This step takes <strong>O(<em>n</em>)</strong>, where <em>n</em> is the number of points in question.</p>
+      </blockquote>
+      <p><u>Step-2</u></p>
+      <blockquote>
+        <p>Set of points must be <strong>sorted in increasing order of the angle</strong> they and the point <em>P</em> make with the x-axis. Any general-purpose <strong>sorting algorithm</strong> is appropriate for this, for example <strong>mergesort</strong> (which is O(<em>n</em> log <em>n</em>)).</p>
+        <p>Sorting in order of angle <strong>does not</strong> require computing the angle. It is possible to use any function of the angle which is monotonic in the interval {0, pi} . The <strong>cosine</strong> is easily computed using the dot product, or the slope of the line may be used. If numeric precision is at a stake, the <strong>comparison function</strong> used by the <strong>sorting algorithm</strong> can use the<strong> sign</strong> of the<strong> cross product </strong>to determine relative angles.</p>
+      </blockquote>
+      <p><u>Step-3</u></p>
+      <blockquote>
+        <p>The algorithm proceeds by considering each of the points in the sorted array in <strong>sequence</strong>. For each point, it is first determined whether traveling from the two points<strong> immediately preceding</strong> this point constitutes making a<strong> left turn </strong>or a<strong> right turn</strong>. If a right turn, the <strong>second-to-last point</strong> is not part of the convex hull, and lies 'inside' it. The same determination is then made for the set of the latest point and the two points that immediately precede the point found to have been inside the hull, and is repeated until a<strong> &quot;left turn&quot; </strong>set is encountered, at which point the algorithm moves on to the next point in the set of points in the sorted array minus any points that were found to be inside the hull; there is no need to consider these points again. (If at any stage the three points are collinear, one may opt either to discard or to report it, since in some applications it is required to find all points on the boundary of the convex hull.)</p>
+        <p>Again, determining whether three points constitute a &quot;left turn&quot; or a &quot;right turn&quot; does not require computing the actual angle between the two line segments, and can actually be achieved with simple arithmetic only. For three points P1 , P2 , P3 compute the <em>z</em>-coordinate of the <strong>cross product</strong> of the two vectors P1P2 , P1P3. If the result is 0, the points are collinear; if it is positive, the three points constitute a &quot;left turn&quot; or counter-clockwise orientation, otherwise a &quot;right turn&quot; or clockwise orientation (for counter-clockwise numbered points).</p>
+        <p>This process will eventually return to the point at which it started, at which point the <strong>algorithm</strong> is completed and the stack now contains the points on the convex hull in <strong>counterclockwise</strong> order.</p>
+      </blockquote>
+      <p class="sa">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <p class="sa"><strong>Jarvis March Algorithm</strong></p>
+  <blockquote>
+    <p class="sa">Defination</p>
+    <blockquote>
+      <p class="sa">In computational geometry, the <strong>gift wrapping algorithm</strong> is an algorithm for computing the <strong>convex hull</strong> of a given set of points.</p>
+      <p class="sa">In the two-dimensional case the algorithm is also known as <strong>Jarvis march</strong>, after R. A. Jarvis, who published it in 1973.</p>
+      <p class="sa"> It has <strong>O(<em>nh</em>)</strong> time complexity, where <em><strong>n</strong></em> is the number of points and<strong> <em>h</em></strong> is the number of points on the convex hull. Its real-life performance compared with other convex hull algorithms is favorable when n is small or h is expected to be very small with respect to n. In general cases the algorithm is outperformed by many others.</p>
+    </blockquote>
+    <p class="sa">Algorithm</p>
+    <blockquote>
+      <p>For the sake of simplicity, the description below assumes that the points are in <strong>general position</strong>, i.e., no three points are <strong>collinear</strong>. The algorithm may be easily modified to deal with collinearity, including the choice whether it should report only extreme points (vertices of the convex hull) or all points that lie on the convex hull. Also, the complete implementation must deal with <strong>degenerate cases</strong> when the convex hull has only 1 or 2 vertices, as well as with the issues of limited <strong>arithmetic precision</strong>, both of computer computations and input data.</p>
+      <p>The gift wrapping algorithm begins with <em>i</em>=0 and a point <em>p0</em> known to be on the convex hull, e.g., the leftmost point, and selects the point <em>pi+1</em> such that all points are to the right of the line <em>pi pi+1</em>. This point may be found in O(<em>n</em>) time by comparing <strong>polar angles</strong> of all points with respect to point <em>pi</em> taken for the center of polar coordinates. Letting <em>i</em>=<em>i</em>+1, and repeating with until one reaches <em>ph</em>=<em>p0</em> again yields the convex hull in <em>h</em> steps. In two dimensions, the gift wrapping algorithm is similar to the process of winding a string (or wrapping paper) around the set of points.    </p>
+    </blockquote>
+  </blockquote>
+  <p class="sa"><strong>Andrew's Algorithm</strong></p>
+</blockquote>
+  <p class="sa">___________________________________________________________________________________________________________________________________________________________________________</p>
+  <h2><span class="sa"><strong><u>Analysis And Observations</u></strong></span></h2>
+<blockquote>
+  <p class="sa"><strong>System Configration on which the algorithms were tested:</strong></p>
+  <ul>
+    <li>MacBook Air (13-inc , Early 2015)</li>
+    <li>Intel HD Graphics 6000 1536 MB </li>
+    <li>4 GB  1600 MHz DDR3</li>
+    <li>1.6 GHZ Intel Core i5 </li>
+  </ul>
+  <p class="sa"><strong>Data Analysis</strong></p>
+  <blockquote>
+    <p class="sa"><strong><img src="time.PNG" width="417" height="143" /></strong></p>
+    <p class="sa"><img src="chart.PNG" width="482" height="271" /></p>
+    <p class="sa">&nbsp;</p>
+  </blockquote>
+</blockquote>
+  <p class="sa">___________________________________________________________________________________________________________________________________________________________________________</p>
+ <h2><span class="sa"><strong><u>Visualization</u></strong></span></h2>
+ <blockquote>
+   <p>as the conves hull of a given set of points is unquie i.e independent of the algorithm therefore only images based on the data set are shown</p>
+   <p>10 data points </p>
+   <blockquote>
+     <p><img src="hull.PNG" width="490" height="396" /></p>
+   </blockquote>
+   <p>100 data points </p>
+   <blockquote>
+     <p><img src="hull_100.PNG" width="565" height="511" /></p>
+   </blockquote>
+   <p>1000 data points</p>
+   <blockquote>
+     <p><img src="hull_1000.PNG" width="516" height="424" /></p>
+   </blockquote>
+   <p>10000 data points</p>
+   <blockquote>
+     <p><img src="hull_10000.PNG" width="649" height="461" /></p>
+   </blockquote>
+   <p>100000 data points</p>
+   <blockquote>
+     <p><img src="hull_100000.PNG" width="637" height="503" /></p>
+   </blockquote>
+   <p>&nbsp;</p>
+ </blockquote>
+ <p class="sa">___________________________________________________________________________________________________________________________________________________________________________</p>
+   <h2><span class="sa"><strong><u>About Visualization Software</u></strong></span></h2>
+   <blockquote>
+     <p>&nbsp;</p>
+     <p>for the visualization the software :</p>
+     <blockquote>
+       <p>Visualization Platform</p>
+       <blockquote>
+         <p>the visualization software along with a sample ch file is available in the repo in the visualization directory</p>
+       </blockquote>
+       <p>Platform - Windows 10</p>
+     </blockquote>
+     <p>The software supports &quot;.ch&quot; format . </p>
+     <p>To create a file for visualization the format must be of the following</p>
+     <ul>
+       <li>the first line mush be &quot;CH&quot;</li>
+       <li>2nd line must contain total number of points and the total number of point in convex hull seperated by a space</li>
+       <li>the 2nd line must be followed by all the points x , y ,z co-ordinate </li>
+       <li>after which it must contain the index of the points which are in convex hull in clockwise or anti clockwise direction </li>
+     </ul>
+     <p>Sample File :</p>
+     <p><img src="sample ch file.PNG" width="153" height="324" alt="" /></p>
+   </blockquote>
+  <p>&nbsp;	</p>
+  <p class="sa">___________________________________________________________________________________________________________________________________________________________________________</p>
+
+  <p>&nbsp;</p>
+</body>
+</html>
